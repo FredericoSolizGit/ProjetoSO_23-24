@@ -1,0 +1,3 @@
+/home/so/CLionProjects/ProjetoSO/cmake-build-debug/CMakeFiles/ProjetoSO.dir
+/home/so/CLionProjects/ProjetoSO/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/so/CLionProjects/ProjetoSO/cmake-build-debug/CMakeFiles/rebuild_cache.dir
