@@ -2,19 +2,22 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
-#include <math.h>
 #include <unistd.h>
-#include <sys/wait.h>
+#include "requisito_1.h"
+#include "monteCarlo.h"
+#include "requisito_2.h"
 
 #define NUM_POINTS 1000000
 #define fmax
 #define fmin
 
 
-typedef struct {
-    double x;
-    double y;
-} Point;
+Point generateRandomPoint() {
+    Point p;
+    p.x = ((double)rand() / RAND_MAX) * 2 - 1; // Intervalo de -1 a 1
+    p.y = ((double)rand() / RAND_MAX) * 2 - 1; // Intervalo de -1 a 1
+    return p;
+}
 
 int orientation(Point p, Point q, Point r) {
     double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
@@ -77,6 +80,9 @@ bool isInsidePolygon(Point polygon[], int n, Point p) {
     return count&1;
 }
 
+
+
+
 int main(int argc, char *argv[]) {
     srand(time(NULL));
 
@@ -92,41 +98,11 @@ int main(int argc, char *argv[]) {
     char *filename = argv[1];
     int num_processes = atoi(argv[2]);
     int num_points_per_process = atoi(argv[3]);
-    int points_per_child = num_points_per_process / num_processes;
 
-    FILE *file = fopen(filename, "w");
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo %s.\n", filename);
-        return 1;
-    }
-
-    for (int i = 0; i < num_processes; i++) {
-        pid_t pid = fork();
-        if (pid < 0) {
-            printf("Fork falhou.\n");
-            return 1;
-        } else if (pid == 0) {
-            // Processo filho
-            srand(time(NULL) ^ getpid());
+    requisito_1(filename, num_processes, num_points_per_process);
+    //requisito_2(filename, num_processes, num_points_per_process, polygon, 512);
 
 
-            for (int j = 0; j < points_per_child; j++) {
-                Point p = {((double)rand() / RAND_MAX) * 2 - 1, ((double)rand() / RAND_MAX) * 2 - 1};
-                fprintf(file, "%.2f, %.2f\n", p.x, p.y); // Escreve os pontos no arquivo
-            }
-
-            fclose(file); // Fecha o arquivo antes de encerrar o processo filho
-            exit(0);
-        }
-    }
-    // Processo pai espera por todos os filhos terminarem
-    for (int i = 0; i < num_processes; i++) {
-        wait(NULL);
-    }
-
-    fclose(file);
-
-    printf("Os pontos foram escritos em %s.\n", filename);
 
     return 0;
 }
