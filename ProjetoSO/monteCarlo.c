@@ -7,6 +7,7 @@
 #include "monteCarlo.h"
 #include "requisito_2.h"
 #include "requisito_3.h"
+#include "requisito_4.h"
 
 #define NUM_POINTS 1000000
 #define fmax
@@ -102,7 +103,8 @@ int main(int argc, char *argv[]) {
 
     //requisito_1(filename, num_processes, num_points_per_process);
     //requisito_2(filename, num_processes, num_points_per_process, polygon, 512);
-    requisito_3(filename, num_processes, num_points_per_process, polygon, 512);
+    //requisito_3(filename, num_processes, num_points_per_process, polygon, 512);
+    requisito_4(filename, num_processes, num_points_per_process, polygon, 512);
 
 
 
