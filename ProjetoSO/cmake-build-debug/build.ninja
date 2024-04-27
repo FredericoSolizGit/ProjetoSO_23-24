@@ -79,6 +79,12 @@ build CMakeFiles/ProjetoSO.dir/requisito_4.c.o: C_COMPILER__ProjetoSO_unscanned_
   OBJECT_DIR = CMakeFiles/ProjetoSO.dir
   OBJECT_FILE_DIR = CMakeFiles/ProjetoSO.dir
 
+build CMakeFiles/ProjetoSO.dir/requisito_5.c.o: C_COMPILER__ProjetoSO_unscanned_Debug /home/so/CLionProjects/ProjetoSO/requisito_5.c || cmake_object_order_depends_target_ProjetoSO
+  DEP_FILE = CMakeFiles/ProjetoSO.dir/requisito_5.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/ProjetoSO.dir
+  OBJECT_FILE_DIR = CMakeFiles/ProjetoSO.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target ProjetoSO
@@ -87,7 +93,7 @@ build CMakeFiles/ProjetoSO.dir/requisito_4.c.o: C_COMPILER__ProjetoSO_unscanned_
 #############################################
 # Link the executable ProjetoSO
 
-build ProjetoSO: C_EXECUTABLE_LINKER__ProjetoSO_Debug CMakeFiles/ProjetoSO.dir/monteCarlo.c.o CMakeFiles/ProjetoSO.dir/requisito_1.c.o CMakeFiles/ProjetoSO.dir/requisito_2.c.o CMakeFiles/ProjetoSO.dir/requisito_3.c.o CMakeFiles/ProjetoSO.dir/requisito_4.c.o
+build ProjetoSO: C_EXECUTABLE_LINKER__ProjetoSO_Debug CMakeFiles/ProjetoSO.dir/monteCarlo.c.o CMakeFiles/ProjetoSO.dir/requisito_1.c.o CMakeFiles/ProjetoSO.dir/requisito_2.c.o CMakeFiles/ProjetoSO.dir/requisito_3.c.o CMakeFiles/ProjetoSO.dir/requisito_4.c.o CMakeFiles/ProjetoSO.dir/requisito_5.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/ProjetoSO.dir
   POST_BUILD = :

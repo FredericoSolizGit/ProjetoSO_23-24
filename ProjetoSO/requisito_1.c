@@ -6,18 +6,18 @@
 #include "monteCarlo.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <stdbool.h>
-#include <math.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <sys/wait.h>
+#include <time.h>
+;
 
 void requisito_1(char *filename, int num_processes, int num_points_per_process) {
     int points_per_child = num_points_per_process / num_processes;
 
-    FILE *file = fopen(filename, "w");
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo %s.\n", filename);
+    int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+    if (fd == -1) {
+        printf("Erro ao abrir o ficheiro %s.\n", filename);
         return;
     }
 
@@ -32,19 +32,24 @@ void requisito_1(char *filename, int num_processes, int num_points_per_process) 
 
             for (int j = 0; j < points_per_child; j++) {
                 Point p = {((double)rand() / RAND_MAX) * 2 - 1, ((double)rand() / RAND_MAX) * 2 - 1};
-                fprintf(file, "%.2f, %.2f\n", p.x, p.y);
+                char buffer[64];
+                int len = snprintf(buffer, sizeof(buffer), "%.2f, %.2f\n", p.x, p.y);
+                if (write(fd, buffer, len) == -1) {
+                    perror("Erro ao escrever no ficheiro");
+                    exit(EXIT_FAILURE);
+                }
             }
 
-            fclose(file); // Fecha o arquivo antes de encerrar o processo filho
-            exit(0);
+            close(fd);
+            exit(EXIT_SUCCESS);
         }
     }
-    // Processo pai espera por todos os filhos terminarem
+
     for (int i = 0; i < num_processes; i++) {
         wait(NULL);
     }
 
-    fclose(file);
+    close(fd);
 
     printf("Os pontos foram escritos em %s.\n", filename);
 }
