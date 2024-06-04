@@ -13,16 +13,19 @@ typedef struct {
     double x;
     double y;
 } Point;
+
 typedef struct {
     int thread_id;
     int num_threads;
     int num_points;
     Point *points;
-    Point  *polygon;
-    int polygon_size;
     int *inside_count;
     pthread_mutex_t *mutex;
+    int polygon_size;
+    Point *polygon;
+    int *checked_points;
 } ThreadData;
+
 
 Point generateRandomPoint();
 int orientation(Point p, Point q, Point r);
