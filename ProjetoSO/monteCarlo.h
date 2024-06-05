@@ -8,6 +8,7 @@ typedef struct {
     double x;
     double y;
 } Point;
+
 Point generateRandomPoint();
 int orientation(Point p, Point q, Point r);
 bool onSegment(Point p, Point q, Point r);

@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include "monteCarlo.h"
 
-// Função da barra de progresso
+// progress bar function
 void *progressbar(void *arg) {
     ThreadData *data = (ThreadData *)arg;
     int num_points = data->num_points;
@@ -22,19 +22,19 @@ void *progressbar(void *arg) {
         pthread_mutex_unlock(mutex);
 
         int percentage = (local_checked_points * 100) / num_points;
-        printf("\rProgresso: %d%%", percentage);
+        printf("\rprogress: %d%%", percentage);
         fflush(stdout);
 
         if (local_checked_points >= num_points) {
             break;
         }
-        sleep(1); // Atualiza a barra de progresso a cada 0,1 segundo
+        usleep(50000);
     }
     printf("\n");
     return NULL;
 }
 
-// Função da thread de trabalho
+// working thread
 void *Worker_thread(void *arg) {
     ThreadData *data = (ThreadData *)arg;
     int points_per_thread = data->num_points / data->num_threads;
@@ -46,7 +46,7 @@ void *Worker_thread(void *arg) {
         if (isInsidePolygon(data->polygon, data->polygon_size, data->points[i])) {
             local_count++;
         } else {
-            //printf("Ponto (%lf, %lf) não está dentro do polígono.\n", data->points[i].x, data->points[i].y);
+            //printf("point (%lf, %lf) isn't inside the polygon.\n", data->points[i].x, data->points[i].y);
         }
     }
 
@@ -58,7 +58,7 @@ void *Worker_thread(void *arg) {
     return NULL;
 }
 
-// Função principal (requisito_1_2fase)
+// main function
 void requisito_2_2ºfase(char *filename, int num_threads, int num_points) {
     srand(time(NULL));
 
@@ -69,20 +69,19 @@ void requisito_2_2ºfase(char *filename, int num_threads, int num_points) {
     int checked_points = 0;
     Point *points = (Point *)malloc(num_points * sizeof(Point));
 
-    // Lê o polígono do arquivo
     int polygon_size;
     Point *polygon;
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
-        printf("Erro ao abrir o arquivo %s\n", filename);
+        printf("error opening file %s\n", filename);
         return;
     }
     fscanf(file, "%d", &polygon_size);
-    printf("Tamanho do polígono: %d\n", polygon_size);
+    printf("polygon size: %d\n", polygon_size);
     polygon = (Point *)malloc(polygon_size * sizeof(Point));
     for (int i = 0; i < polygon_size + 1; i++) {
         fscanf(file, "%lf %lf", &(polygon[i].x), &(polygon[i].y));
-        //printf("Ponto %d: (%lf, %lf)\n", i, polygon[i].x, polygon[i].y);
+        //printf("point %d: (%lf, %lf)\n", i, polygon[i].x, polygon[i].y);
     }
     fclose(file);
 
@@ -105,19 +104,19 @@ void requisito_2_2ºfase(char *filename, int num_threads, int num_points) {
         pthread_create(&threads[i], NULL, Worker_thread, &data[i]);
     }
 
-    // Cria a thread da barra de progresso
+    // thread for progress bar
     pthread_create(&progress_thread, NULL, progressbar, &data[0]);
 
     for (int i = 0; i < num_threads; i++) {
         pthread_join(threads[i], NULL);
     }
 
-    // Espera a thread da barra de progresso terminar
+    // wait termination of progress thread
     pthread_join(progress_thread, NULL);
 
     double area = 4 * inside_count / (double)num_points;
-    printf("Área estimada: %f\n", area);
-    printf("Número de pontos dentro do polígono: %d\n", inside_count);
+    printf("Estimated area: %f\n", area);
+    printf("number of points inside the polygon: %d\n", inside_count);
 
     free(points);
     free(data);

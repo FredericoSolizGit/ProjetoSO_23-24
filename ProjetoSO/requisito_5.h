@@ -6,5 +6,5 @@
 #include "monteCarlo.h"
 #ifndef PROJETOSO_REQUISITO_5_H
 #define PROJETOSO_REQUISITO_5_H
-void requisito_5(char *filename, int num_processes, int total_points_generated, Point polygon[], int n);
+void requisito_5(char *filename, int num_processes, int total_points_generated);
 #endif //PROJETOSO_REQUISITO_5_H

@@ -67,6 +67,18 @@ build CMakeFiles/ProjetoSO2.dir/requisito_2_2ºfase.c.o: C_COMPILER__ProjetoSO2_
   OBJECT_DIR = CMakeFiles/ProjetoSO2.dir
   OBJECT_FILE_DIR = CMakeFiles/ProjetoSO2.dir
 
+build CMakeFiles/ProjetoSO2.dir/requisito_3_2ºfase.c.o: C_COMPILER__ProjetoSO2_unscanned_Debug /home/so/CLionProjects/ProjetoSO2/requisito_3_2ºfase.c || cmake_object_order_depends_target_ProjetoSO2
+  DEP_FILE = CMakeFiles/ProjetoSO2.dir/requisito_3_2ºfase.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/ProjetoSO2.dir
+  OBJECT_FILE_DIR = CMakeFiles/ProjetoSO2.dir
+
+build CMakeFiles/ProjetoSO2.dir/requisito_3b_2ºfase.c.o: C_COMPILER__ProjetoSO2_unscanned_Debug /home/so/CLionProjects/ProjetoSO2/requisito_3b_2ºfase.c || cmake_object_order_depends_target_ProjetoSO2
+  DEP_FILE = CMakeFiles/ProjetoSO2.dir/requisito_3b_2ºfase.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/ProjetoSO2.dir
+  OBJECT_FILE_DIR = CMakeFiles/ProjetoSO2.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target ProjetoSO2
@@ -75,7 +87,7 @@ build CMakeFiles/ProjetoSO2.dir/requisito_2_2ºfase.c.o: C_COMPILER__ProjetoSO2_
 #############################################
 # Link the executable ProjetoSO2
 
-build ProjetoSO2: C_EXECUTABLE_LINKER__ProjetoSO2_Debug CMakeFiles/ProjetoSO2.dir/monteCarlo.c.o CMakeFiles/ProjetoSO2.dir/requisito_1_2ºfase.c.o CMakeFiles/ProjetoSO2.dir/requisito_2_2ºfase.c.o
+build ProjetoSO2: C_EXECUTABLE_LINKER__ProjetoSO2_Debug CMakeFiles/ProjetoSO2.dir/monteCarlo.c.o CMakeFiles/ProjetoSO2.dir/requisito_1_2ºfase.c.o CMakeFiles/ProjetoSO2.dir/requisito_2_2ºfase.c.o CMakeFiles/ProjetoSO2.dir/requisito_3_2ºfase.c.o CMakeFiles/ProjetoSO2.dir/requisito_3b_2ºfase.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/ProjetoSO2.dir
   POST_BUILD = :

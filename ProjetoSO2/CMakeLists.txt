@@ -9,4 +9,8 @@ add_executable(ProjetoSO2
         requisito_1_2ºfase.c
         requisito_1_2ºfase.h
         requisito_2_2ºfase.c
-        requisito_2_2ºfase.h)
+        requisito_2_2ºfase.h
+        requisito_3_2ºfase.c
+        requisito_3_2ºfase.h
+        requisito_3b_2ºfase.c
+        requisito_3b_2ºfase.h)

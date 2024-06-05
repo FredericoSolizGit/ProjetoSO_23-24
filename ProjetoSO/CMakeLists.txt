@@ -14,4 +14,5 @@ add_executable(ProjetoSO monteCarlo.c
         requisito_4.c
         requisito_4.h
         requisito_5.c
-        requisito_5.h)
+        requisito_5.h
+)

@@ -17,17 +17,17 @@ void requisito_1(char *filename, int num_processes, int num_points_per_process) 
 
     int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
     if (fd == -1) {
-        printf("Erro ao abrir o ficheiro %s.\n", filename);
+        printf("error opening file %s.\n", filename);
         return;
     }
 
     for (int i = 0; i < num_processes; i++) {
         pid_t pid = fork();
         if (pid < 0) {
-            printf("Fork falhou.\n");
+            printf("fork failed\n");
             return;
         } else if (pid == 0) {
-            // Processo filho
+            // child
             srand(time(NULL) ^ getpid());
 
             for (int j = 0; j < points_per_child; j++) {
@@ -35,7 +35,7 @@ void requisito_1(char *filename, int num_processes, int num_points_per_process) 
                 char buffer[64];
                 int len = snprintf(buffer, sizeof(buffer), "%.2f, %.2f\n", p.x, p.y);
                 if (write(fd, buffer, len) == -1) {
-                    perror("Erro ao escrever no ficheiro");
+                    perror("error writing to file");
                     exit(EXIT_FAILURE);
                 }
             }
@@ -51,5 +51,5 @@ void requisito_1(char *filename, int num_processes, int num_points_per_process) 
 
     close(fd);
 
-    printf("Os pontos foram escritos em %s.\n", filename);
+    printf("points written in %s.\n", filename);
 }

@@ -6,6 +6,8 @@
 #include "monteCarlo.h"
 #include "requisito_1_2ºfase.h"
 #include "requisito_2_2ºfase.h"
+#include "requisito_3_2ºfase.h"
+#include "requisito_3b_2ºfase.h"
 
 
 #define fmax
@@ -93,8 +95,10 @@ int main(int argc, char *argv[]) {
     int num_points = atoi(argv[3]);
 
 
-    requisito_1_2ºfase(filename, num_threads, num_points);
+    //requisito_1_2ºfase(filename, num_threads, num_points);
     //requisito_2_2ºfase(filename, num_threads, num_points);
+    requisito_3_2ºfase(filename, num_threads, num_points);
+    //requisito_3b_2ºfase(filename, num_threads, num_points);
 
     return 0;
 }
